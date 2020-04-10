@@ -1,0 +1,50 @@
+div
+{
+    display: inline-block;
+}
+
+.example-card 
+{
+    max-width: 270px;
+    background-color: white;
+}
+
+mat-card-content
+{
+    color: black;
+}
+
+mat-card
+{
+    margin: 5px;
+}
+
+a
+{
+    color: black;
+    background-color: white;
+    border-color: white;
+    border-width: 2px;
+}
+
+a:hover
+{
+    border-color: black;
+}
+
+img
+{
+	filter: grayscale(0.5);
+    height: 100%;
+}
+
+img:hover
+{
+	filter: grayscale(0);
+	cursor: pointer;
+}
+
+p
+{
+    height: 30px;
+}
