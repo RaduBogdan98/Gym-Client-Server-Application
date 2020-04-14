@@ -1,0 +1,11 @@
+<mat-grid-list cols="3" rowHeight="650px">
+    <mat-grid-tile *ngFor="let product of products">
+        <product
+        [name]="product.name" 
+        [producer]="product.producer" 
+        [price]="product.price"
+        [image]="product.image" 
+        [description]="product.description"></product>
+    </mat-grid-tile>
+</mat-grid-list>
+

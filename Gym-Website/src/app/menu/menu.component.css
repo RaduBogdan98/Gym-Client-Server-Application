@@ -12,3 +12,7 @@
 a{
     font-size: 30;
 }
+
+img{
+    filter: invert(100%);
+}

@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon' 
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 import {MatCardModule} from '@angular/material/card'; 
+import {MatGridListModule} from '@angular/material/grid-list'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,13 +14,18 @@ import { MenuComponent } from './menu/menu.component';
 import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
 import { TrainerService } from './trainer.service';
 import { TrainersSectionComponent } from './trainers-section/trainers-section.component';
+import { ProductComponent } from './product/product.component';
+import { ProductGridComponent } from './product-grid/product-grid.component';
+import { ProductsService } from './products.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     TrainerProfileComponent,
-    TrainersSectionComponent
+    TrainersSectionComponent,
+    ProductComponent,
+    ProductGridComponent
   ],
   imports: [
     BrowserModule,
@@ -29,10 +35,12 @@ import { TrainersSectionComponent } from './trainers-section/trainers-section.co
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [
     TrainerService,
+    ProductsService
   ],
   bootstrap: [AppComponent]
 })

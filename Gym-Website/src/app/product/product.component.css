@@ -1,0 +1,75 @@
+div
+{
+    display: inline-block;
+    min-height: 40px;
+    max-height: 50px;
+}
+
+.example-card 
+{
+    max-width: 400px;
+    background-color: white;
+}
+
+mat-card-content
+{
+    color: black;
+}
+
+mat-card
+{
+    margin: 5px;
+}
+
+a
+{
+    color: black;
+    background-color: white;
+    border-color: white;
+    border-width: 2px;
+    margin-left: auto;
+}
+
+a:hover
+{
+    border-color: black;
+}
+
+img
+{
+	filter: grayscale(0.5);
+    height: 100%;
+}
+
+img:hover
+{
+	filter: grayscale(0);
+	cursor: pointer;
+}
+
+span
+{
+    color: black;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+p
+{
+    height: 30px;
+}
+
+.left 
+{
+}
+  
+.right 
+{
+    text-align: right /* only needed for the table version */
+}
+  
+.flex 
+{
+    display: flex;
+    justify-content: space-between;
+}

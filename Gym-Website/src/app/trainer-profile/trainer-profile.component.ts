@@ -6,9 +6,6 @@ import { Component, OnInit, Attribute, Input } from '@angular/core';
   styleUrls: ['./trainer-profile.component.css']
 })
 export class TrainerProfileComponent implements OnInit {
-  //name="Farcas Rares"; 
-  //description="Antrenor personal,Manager fitness de grup";
-  //image_src="rares.jpg";
   @Input() name:string;
   @Input() description:string;
   @Input() image:string;
