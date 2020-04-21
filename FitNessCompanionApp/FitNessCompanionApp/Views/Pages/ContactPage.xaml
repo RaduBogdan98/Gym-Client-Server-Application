@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="FitNessCompanionApp.Pages.ContactPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FitNessCompanionApp.Pages"
+             mc:Ignorable="d" 
+             d:DesignWidth="1000" Height="auto" Background="WhiteSmoke" FontSize="15">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="20,10,0,0"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Margin" Value="10,5,10,5"/>
+        </Style>
+        <Style x:Key="sendButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="Black" BorderThickness="1.3" BorderBrush="Black" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation To="WhiteSmoke" Duration="0:0:0.3" Storyboard.TargetName="border" Storyboard.TargetProperty="Background.Color"/>
+                                        <ColorAnimation To="Black" Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation To="Black" Duration="0:0:0.3" Storyboard.TargetName="border" Storyboard.TargetProperty="Background.Color"/>
+                                        <ColorAnimation To="White" Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock FontWeight="DemiBold" HorizontalAlignment="Center" Margin="10" Grid.ColumnSpan="2" FontSize="50">CONTACT</TextBlock>
+        <Rectangle VerticalAlignment="Bottom" Height="3" Fill="Black" Grid.ColumnSpan="2" Margin="10,0,10,0"/>
+
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="20" FontSize="25" Grid.ColumnSpan="2">What can we help you with? 😄</TextBlock>
+
+        <ScrollViewer Grid.Row="2" Grid.Column="0" VerticalScrollBarVisibility="Hidden">
+            <StackPanel>
+                <Label Content="Your Name:" Margin="20,5,0,0"/>
+                <TextBox/>
+                <Label Content="Your Email:"/>
+                <TextBox/>
+                <Label Content="Your Message:"/>
+                <TextBox Height="200"/>
+
+                <Button Style="{StaticResource sendButton}" Width="150" Margin="10">
+                    <TextBlock Padding="10">Send</TextBlock>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,80,0,0">
+            <DockPanel Margin="10">
+                <Image Source="../../Images/Contact/pin.ico" Height="20" HorizontalAlignment="Left" Margin="30,0,30,0"/>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" >Piaţa Victoriei Nr. 2, 300006 Timişoara, jud. Timiş, România</TextBlock>
+            </DockPanel>
+
+            <DockPanel  Margin="10">
+                <Image Source="../../Images/Contact/phone.ico" Height="20" HorizontalAlignment="Left" Margin="30,0,30,0"/>
+                <TextBlock HorizontalAlignment="Center">0787742219</TextBlock>
+            </DockPanel>
+
+            <DockPanel  Margin="10">
+                <Image Source="../../Images/Contact/mail.ico" Height="20" HorizontalAlignment="Left" Margin="30,0,30,0"/>
+                <TextBlock HorizontalAlignment="Center">raducotisel@gmail.com</TextBlock>
+            </DockPanel>
+
+            <Rectangle Fill="Black" Margin="50,15,50,15" Height="2"/>
+
+            <TextBlock HorizontalAlignment="Center" TextAlignment="Center">You can find us on:</TextBlock>
+            <DockPanel Margin="10" HorizontalAlignment="Center">
+                <Image Source="../../Images/Contact/facebook.ico" Height="20" Margin="5"/>
+                <Image Source="../../Images/Contact/instagram.ico" Height="20" Margin="5"/>
+                <Image Source="../../Images/Contact/linkedin.ico" Height="20" Margin="5"/>
+                <Image Source="../../Images/Contact/twitter.ico" Height="20" Margin="5"/>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

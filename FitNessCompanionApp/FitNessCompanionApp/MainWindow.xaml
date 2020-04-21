@@ -1,0 +1,132 @@
+﻿<Window x:Class="FitNessCompanionApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitNessCompanionApp"
+        xmlns:pages="clr-namespace:FitNessCompanionApp.Pages"
+        mc:Ignorable="d"
+        Title="" Height="700" Width="1000" 
+        WindowStyle="None" BorderThickness="0" AllowsTransparency="True">
+    <Window.Resources>
+        <Style x:Key="menuButton" TargetType="Button">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="1" BorderBrush="Black" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="White" />
+                                <Setter TargetName="border" Property="BorderThickness" Value="1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="cartButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="White" BorderThickness="3" BorderBrush="Black" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="WhiteSmoke"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border"  Property="Background" Value="WhiteSmoke"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="windowStateButton" TargetType="Button">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter Property="Foreground" Value="Silver"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Silver"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Height="auto" VerticalAlignment="Top" Background="Black" Grid.Row="0" MouseLeftButtonDown="MenuBar_MouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="0" HorizontalAlignment="Left" Margin="10" MaxHeight="40" VerticalAlignment="Center" Source="./Images/main-icon-inverted.ico"/>
+            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="15" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center" 
+                       Foreground="White" Margin="45,0,0,0">
+                Fit Ness
+            </TextBlock>
+
+            <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="1" Click="GoToHome">
+                <TextBlock Padding="10">Home</TextBlock>
+            </Button>
+            <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="2" Click="GoToProducts">
+                <TextBlock Padding="10">Products</TextBlock>
+            </Button>
+            <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="3">
+                <TextBlock Padding="10">Services</TextBlock>
+            </Button>
+            <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="4" Click="GoToContact">
+                <TextBlock Padding="10">Contact</TextBlock>
+            </Button>
+
+            <Button Style="{StaticResource windowStateButton}" Click="Close_Click" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="15" Margin="5,5,10,5" Grid.Column="5"/>
+            <Button Style="{StaticResource windowStateButton}" Click="Maximize_Click" Content="▢" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="15" Margin="5,5,25,5" Grid.Column="5"/>
+            <Button Style="{StaticResource windowStateButton}" Click="Minimize_Click" Content="–" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Margin="5,5,45,5" Grid.Column="5"/>
+        </Grid>
+
+        <Border BorderThickness="1" BorderBrush="Black"  Grid.Row="1">
+            <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Border>
+
+        <Grid  Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
+            <Button Style="{StaticResource cartButton}" MaxWidth="60" MaxHeight="60" Margin="10">
+                <Border Padding="10">
+                    <Image Source="./Images/cart.ico"/>
+                </Border>
+            </Button>
+            <Border Background="Red" CornerRadius="10" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Padding="5" Text="0" Foreground="White"/>
+            </Border>
+        </Grid>
+
+
+    </Grid>
+</Window>
