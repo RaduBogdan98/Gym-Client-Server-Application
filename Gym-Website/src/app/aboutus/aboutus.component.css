@@ -1,0 +1,26 @@
+#about
+ {
+ 	padding-top: 50px;
+ 	padding-bottom: 50px;
+ 	color: #555;
+ }
+ .about-content
+ {
+	 padding-top: 20px;
+	
+ }
+ .im
+ {
+	 margin-left: 200px;
+	 margin-top: 30px;
+	
+ }
+ .btn-w
+{
+    color:darkorange;
+}
+.btn
+{
+    color:white;
+	font-family: "Roboto", sans-serif;
+}

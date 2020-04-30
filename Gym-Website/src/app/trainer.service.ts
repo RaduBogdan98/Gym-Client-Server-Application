@@ -11,10 +11,10 @@ export class TrainerService {
   getTrainersData(){
     
     return [
-      {name: 'Farcas Rares', description: 'Antrenor personal, Manager fitness de grup', image_src: 'rares.jpg'},
-      {name: 'Imre Andreea', description: 'Profesor de yoga, Antrenor personal, Fitness de grup', image_src: 'andreea.jpg'},
-      {name: 'Gabos Monica', description: 'Instructor cycling, Antrenor personal', image_src: 'monica.jpg'},
-      {name: 'Balint Zoltan', description: 'Antrenor personal, Fitness de grup, Instructor Aerobic', image_src: 'zoltan.jpg'}
+      {name: 'Farcas Rares', description: 'Personal trainer, Group fitness manager', image_src: 'rares.jpg'},
+      {name: 'Imre Andreea', description: 'Yoga teacher, Personal trainer, Group fitnessp', image_src: 'andreea.jpg'},
+      {name: 'Gabos Monica', description: 'Cycling instructor, Personal trainer', image_src: 'monica.jpg'},
+      {name: 'Balint Zoltan', description: 'Personal Trainer, Group Fitness, Aerobic Instructor', image_src: 'zoltan.jpg'}
     ];
   }
 }

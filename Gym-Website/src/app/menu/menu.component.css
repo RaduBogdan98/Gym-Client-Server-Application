@@ -3,15 +3,40 @@
 }
 
 .app-content {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
 }
+.btn-w
+{
+    color:darkorange;
+}
+.btn1
+{
+    color:white;
+    font-family: "Roboto", sans-serif;
+    background: darkorange;
+    border: 1px solid white;
+}
 
+.btn
+{
+    color:white;
+    font-family: "Roboto", sans-serif;
+    
+}
+.btn:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}
 a{
+    
+    
     font-size: 30;
 }
+
 
 img{
     filter: invert(100%);

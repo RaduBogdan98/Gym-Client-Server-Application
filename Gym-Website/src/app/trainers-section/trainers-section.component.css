@@ -2,3 +2,19 @@
 {
     text-align: center;
 }
+#trainer h1
+ {
+    padding-top: 100px;
+ 	text-align: center;
+ 	color:black;
+ 	padding-bottom: 10px;
+ }
+#trainer h1::after
+ {
+ 	content: '';
+ 	background: black;
+ 	display: block;
+ 	height: 3px;
+ 	width: 170px;
+ 	margin: 20px auto 5px;
+ }

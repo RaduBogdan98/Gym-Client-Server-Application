@@ -1,6 +1,15 @@
 <menu></menu>
-<div class="main-component">
-    <div>
-        <product-grid></product-grid>  
-    </div>
-</div>
+<router-outlet></router-outlet>
+<app-slide-show></app-slide-show>
+
+<app-aboutus></app-aboutus>
+<app-subscriptions></app-subscriptions>
+<trainers-section></trainers-section>
+<product-grid></product-grid>  
+<app-contact></app-contact>
+       
+        <script src="./js/smooth-scroll.js"></script>
+        <script>
+            var scroll = new SmoothScroll('a[href*="#"]');
+        </script>
+    

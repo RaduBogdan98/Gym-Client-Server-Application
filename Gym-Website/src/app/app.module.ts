@@ -17,6 +17,13 @@ import { TrainersSectionComponent } from './trainers-section/trainers-section.co
 import { ProductComponent } from './product/product.component';
 import { ProductGridComponent } from './product-grid/product-grid.component';
 import { ProductsService } from './products.service';
+import { SlideShowComponent } from './slide-show/slide-show.component';
+import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
+import { RouterModule } from '@angular/router';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,13 @@ import { ProductsService } from './products.service';
     TrainerProfileComponent,
     TrainersSectionComponent,
     ProductComponent,
-    ProductGridComponent
+    ProductGridComponent,
+    SlideShowComponent,
+    SubscriptionsComponent,
+    AboutusComponent,
+    ContactComponent,
+    LoginComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -36,7 +49,16 @@ import { ProductsService } from './products.service';
     MatIconModule,
     MatSidenavModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    RouterModule.forRoot([
+      { path: 'login',
+        component: LoginComponent
+      } ,
+      {
+        path: 'shoppingcart',
+        component: ShoppingcartComponent
+      }
+    ])
   ],
   providers: [
     TrainerService,

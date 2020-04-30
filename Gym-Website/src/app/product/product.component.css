@@ -1,3 +1,4 @@
+
 div
 {
     display: inline-block;
@@ -23,13 +24,28 @@ mat-card
 
 a
 {
-    color: black;
+    color: darkorange;
     background-color: white;
     border-color: white;
     border-width: 2px;
     margin-left: auto;
 }
+.btn
+{
+	border: 1px solid white;
+	padding: 10px 30px;
+	color: white;
+	text-decoration: none;
+	margin-right: 5px;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+.btn-one
+{
+	background-color: darkorange;
+	font-family: "Roboto", sans-serif;
 
+}
 a:hover
 {
     border-color: black;
@@ -59,9 +75,7 @@ p
     height: 30px;
 }
 
-.left 
-{
-}
+
   
 .right 
 {

@@ -1,0 +1,57 @@
+.row
+{
+	max-width: 1500px;
+	margin:auto;
+}
+
+.hero
+{
+	position: absolute;
+	width: 1500px;
+    margin-left: 0px;
+    
+	
+}
+h1
+{
+	color: #ddd;
+	text-transform: capitalize;
+	font-size: 90px;
+	text-align: center;
+	margin-top: 390px;
+}
+
+
+.button
+{
+	margin-top: 40px;
+	margin-left: 630px;
+}
+
+.btn
+{
+	border: 1px solid white;
+	padding: 10px 30px;
+	color: white;
+	text-decoration: none;
+	margin-right: 5px;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+.btn-one
+{
+	background-color: darkorange;
+	font-family: "Roboto", sans-serif;
+
+}
+.btn-two
+{
+	font-family: "Roboto", sans-serif;
+}
+.btn-two:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}
+
+
