@@ -8,8 +8,7 @@ import { ProductsService } from '../products.service';
 })
 export class ProductGridComponent implements OnInit {
   products: {
-    name:string, 
-    producer:string, 
+    name:string,
     description:string, 
     price:string,
     image:string
