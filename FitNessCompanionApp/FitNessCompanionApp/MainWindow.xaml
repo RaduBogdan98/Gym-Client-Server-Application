@@ -7,7 +7,8 @@
         xmlns:pages="clr-namespace:FitNessCompanionApp.Pages"
         mc:Ignorable="d"
         Title="" Height="700" Width="1000" 
-        WindowStyle="None" BorderThickness="0" AllowsTransparency="True">
+        WindowStyle="None" BorderThickness="0" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="menuButton" TargetType="Button">
             <Setter Property="Background" Value="Black"/>
@@ -100,11 +101,11 @@
             <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="2" Click="GoToProducts">
                 <TextBlock Padding="10">Products</TextBlock>
             </Button>
-            <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="3">
-                <TextBlock Padding="10">Services</TextBlock>
-            </Button>
-            <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="4" Click="GoToContact">
+            <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="3" Click="GoToContact">
                 <TextBlock Padding="10">Contact</TextBlock>
+            </Button>
+            <Button Style="{StaticResource menuButton}" Margin="10,6,10,2" MaxWidth="100" MaxHeight="40" Grid.Column="4" Click="GoToUserPage">
+                <TextBlock Padding="10">User Profile</TextBlock>
             </Button>
 
             <Button Style="{StaticResource windowStateButton}" Click="Close_Click" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="15" Margin="5,5,10,5" Grid.Column="5"/>
@@ -117,13 +118,13 @@
         </Border>
 
         <Grid  Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
-            <Button Style="{StaticResource cartButton}" MaxWidth="60" MaxHeight="60" Margin="10">
+            <Button Style="{StaticResource cartButton}" MaxWidth="60" MaxHeight="60" Margin="10" Click="DisplayCart">
                 <Border Padding="10">
                     <Image Source="./Images/cart.ico"/>
                 </Border>
             </Button>
             <Border Background="Red" CornerRadius="10" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Padding="5" Text="0" Foreground="White"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Padding="5" Text="{Binding CartItemsNumber, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
             </Border>
         </Grid>
 

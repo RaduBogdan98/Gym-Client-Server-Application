@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using FitNessCompanionApp.Model;
 
 namespace FitNessCompanionApp.ViewModels
 {
     class ProductsPresenterViewModel
     {
-        public ProductsPresenterViewModel(string name, string description, string price, string imageSource)
+        public ProductsPresenterViewModel(string name, string description, string price, ImageSource imageSource)
         {
             this.ProductName = name;
             this.ProductDescription = description;
@@ -32,7 +31,7 @@ namespace FitNessCompanionApp.ViewModels
             get; set;
         }
 
-        public string ImageSource
+        public ImageSource ImageSource
         {
             get; set;
         }

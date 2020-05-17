@@ -3,6 +3,8 @@ using FitNessCompanionApp.ViewModels;
 using FitNessCompanionApp.Views;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace FitNessCompanionApp.Pages
 {
@@ -14,25 +16,25 @@ namespace FitNessCompanionApp.Pages
         public ProductsPage(Window mainWindow)
         {
             InitializeComponent();
-            VM = new ProductsPageViewModel();
-            this.ListViewProducts.ItemsSource = VM.GetProducts();
+            VM = ProductsPageViewModel.Instance;
+            this.ListViewProducts.ItemsSource = VM.Products;
             MainWindow = mainWindow;
         }
 
         #region Methods
         private void DisplayProductDetails(object sender, RoutedEventArgs e)
         {
-            Button b = sender as Button;
+            Button productButton = sender as Button;
 
-            if (b != null)
+            if (productButton != null)
             {
-                string productName = ((TextBlock)b.FindName("productName")).Text;
-                string productDescription = ((TextBlock)b.FindName("productDescription")).Text;
-                string imageSource = ((Image)b.FindName("imageSource")).Source.ToString();
-                string productPrice = ((TextBlock)b.FindName("productPrice")).Text;
+                string productName = ((TextBlock)productButton.FindName("productName")).Text;
+                string productDescription = ((TextBlock)productButton.FindName("productDescription")).Text;
+                ImageSource imageSource = ((Image)productButton.FindName("imageSource")).Source;
+                string productPrice = ((TextBlock)productButton.FindName("productPrice")).Text;
 
                 MainWindow.Visibility = Visibility.Collapsed;
-                ProductPresenterView view = new ProductPresenterView(productName, productDescription, productPrice, imageSource);
+                ProductPresenterView view = new ProductPresenterView(productName, productDescription, productPrice, imageSource, VM);
                 bool? productDialogResult = view.ShowDialog();
 
                 if (true == productDialogResult)
@@ -44,9 +46,18 @@ namespace FitNessCompanionApp.Pages
                     MainWindow.Close();
                 }
             }
+        }
 
+        private void AddToCartClick(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            Button productButton = ((Grid)(sender as Button).Parent).Parent as Button;
 
+            string productName = ((TextBlock)productButton.FindName("productName")).Text;
 
+            Product orderedProduct = VM.findProductByName(productName);
+            CartViewModel.Instance.AddProduct(orderedProduct);
+            MainWindowViewModel.Instance.NotifyCartItemsNumberChanged();
         }
         #endregion
 

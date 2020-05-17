@@ -1,17 +1,9 @@
 ﻿using FitNessCompanionApp.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FitNessCompanionApp.Views
 {
@@ -52,30 +44,107 @@ namespace FitNessCompanionApp.Views
             this.DragMove();
         }
 
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void PreviewPasswordInput(object sender, TextCompositionEventArgs e)
         {
 
+        }
+
+        private async void PreviewEmailInput(object sender, TextChangedEventArgs e)
+        {
+            string email = (sender as TextBox).Text;
+
+            if (email != "")
+            {
+                bool? isExistent = await VM.IsEmailAlreadyExistent(email);
+
+                if (true == isExistent)
+                {
+                    this.EmailBubble.Fill = Brushes.Red;
+                }
+                else
+                {
+                    this.EmailBubble.Fill = Brushes.Green;
+                }
+            }
+            else
+            {
+                this.EmailBubble.Fill = Brushes.Red;
+            }
+        }
+
+
+        private async void PreviewUsernameInput(object sender, TextChangedEventArgs e)
+        {
+            string username = (sender as TextBox).Text;
+
+            if (username != "")
+            {
+                bool? isExistent = await VM.IsUsernameAlreadyExistent(username);
+                if (true == isExistent)
+                {
+                    this.UsernameBubble.Fill = Brushes.Red;
+                }
+                else
+                {
+                    this.UsernameBubble.Fill = Brushes.Green;
+                }
+            }
+            else
+            {
+                this.UsernameBubble.Fill = Brushes.Red;
+            }
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            string insertedUsername = this.User_Login.Text;
+            string insertedUsername = this.Name_Login.Text;
             string insertedPassword = this.Password_Login.Password;
 
-            this.DialogResult = VM.CheckLoginCredentials(insertedUsername, insertedPassword);
-            this.Close();
+            if (Enumerable.All(new string[] { insertedUsername, insertedPassword }, s => s != ""))
+            {
+                bool? requestRestult = VM.CheckLoginCredentials(insertedUsername, insertedPassword);
+                if (true == requestRestult)
+                {
+                    this.DialogResult = true;
+                    this.Close();
+                }
+                else if (false == requestRestult)
+                {
+                    new MessageDialog("Wrong credentials! Retry or Sign Up!").Show();
+                }
+            }
+            else
+            {
+                new MessageDialog("Wrong input!").Show();
+            }
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
-            string insertedName = this.Name_SignUp.Text;
+            string insertedUsername = this.Name_SignUp.Text;
             string insertedEmail = this.Email_SignUp.Text;
-            string insertedUsername = this.User_SignUp.Text;
             string insertedPassword = this.Password_SignUp.Password;
             string insertedConfirmPassword = this.PasswordConfirm_SignUp.Password;
 
-            this.DialogResult = VM.CheckSignUpCredentials(insertedName, insertedEmail, insertedUsername, insertedPassword, insertedConfirmPassword);
-            this.Close();
+            if (Enumerable.All(new string[] { insertedUsername, insertedEmail, insertedPassword, insertedConfirmPassword }, s => s != "") && AllSignUpChecksAreCorrect())
+            {
+                bool? requestResult = VM.CheckSignUpCredentials(insertedUsername, insertedEmail, insertedPassword, insertedConfirmPassword);
+                if (true == requestResult)
+                {
+                    this.DialogResult = true;
+                    this.Close();
+                }
+            }
+            else
+            {
+                new MessageDialog("Wrong input!").Show();
+            }
+        }
+
+        private bool AllSignUpChecksAreCorrect()
+        {
+            return (this.EmailBubble.Fill == Brushes.Green &&
+                    this.UsernameBubble.Fill == Brushes.Green);
         }
         #endregion
 

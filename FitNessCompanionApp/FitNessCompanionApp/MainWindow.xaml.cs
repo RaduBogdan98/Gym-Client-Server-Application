@@ -1,10 +1,6 @@
 ﻿using FitNessCompanionApp.Pages;
+using FitNessCompanionApp.ViewModels;
 using FitNessCompanionApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,8 +18,23 @@ namespace FitNessCompanionApp
 
             if (true == accepted)
             {
-                InitializeComponent();
-                this.MainGrid.Children.Add(new HomePage());
+                try
+                {
+                    InitializeComponent();
+                    homePage = new HomePage();
+                    productsPage = new ProductsPage(this);
+                    contactPage = new ContactPage();
+                    userPage = new UserPage();
+                    VM = MainWindowViewModel.Instance;
+
+                    this.MainGrid.Children.Add(homePage);
+                    this.DataContext = VM;
+                }
+                catch
+                {
+                    MessageBox.Show("Server is not running! Start the server and restart the application!");
+                    this.Close();
+                }
             }
             else
             {
@@ -59,20 +70,53 @@ namespace FitNessCompanionApp
         private void GoToHome(object sender, RoutedEventArgs e)
         {
             this.MainGrid.Children.Clear();
-            this.MainGrid.Children.Add(new HomePage());
+            this.MainGrid.Children.Add(homePage);
         }
 
         private void GoToProducts(object sender, RoutedEventArgs e)
         {
             this.MainGrid.Children.Clear();
-            this.MainGrid.Children.Add(new ProductsPage(this));
+
+            if (VM.ShouldProductsPageUpdate == true)
+            {
+                productsPage = new ProductsPage(this);
+                MainWindowViewModel.Instance.ShouldProductsPageUpdate = false;
+            }
+
+            this.MainGrid.Children.Add(productsPage);
         }
 
         private void GoToContact(object sender, RoutedEventArgs e)
         {
             this.MainGrid.Children.Clear();
-            this.MainGrid.Children.Add(new ContactPage());
+            this.MainGrid.Children.Add(contactPage);
         }
+
+        private void GoToUserPage(object sender, RoutedEventArgs e)
+        {
+            this.MainGrid.Children.Clear();
+
+            if(VM.ShouldUserPageUpdate == true)
+            {
+                userPage = new UserPage();
+                MainWindowViewModel.Instance.ShouldUserPageUpdate = false;
+            }
+
+            this.MainGrid.Children.Add(userPage);
+        }
+
+        private void DisplayCart(object sender, RoutedEventArgs e)
+        {
+            new CartView().ShowDialog();
+        }
+        #endregion
+
+        #region Fields
+        private HomePage homePage;
+        private ProductsPage productsPage;
+        private ContactPage contactPage;
+        private UserPage userPage;
+        private MainWindowViewModel VM;
         #endregion
     }
 }

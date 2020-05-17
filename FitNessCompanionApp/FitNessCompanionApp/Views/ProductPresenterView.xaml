@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitNessCompanionApp.Views"
+        xmlns:converters="clr-namespace:FitNessCompanionApp.Helpers.Converter"
         mc:Ignorable="d"
         Title="" Height="700" Width="1000" 
-        WindowStyle="None" BorderThickness="0" AllowsTransparency="True">
+        WindowStyle="None" BorderThickness="0" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
         <Style x:Key="windowStateButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="Silver"/>
@@ -34,16 +37,26 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="border" Background="White" BorderThickness="2" BorderBrush="Black" CornerRadius="3">
+                        <Border Name="border" Background="White" BorderThickness="1.3" BorderBrush="Black" CornerRadius="3">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="Button.IsPressed" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="WhiteSmoke" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="WhiteSmoke" />
-                            </Trigger>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation To="Black" Duration="0:0:0.3" Storyboard.TargetName="border" Storyboard.TargetProperty="Background.Color"/>
+                                        <ColorAnimation To="White" Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation To="White" Duration="0:0:0.3" Storyboard.TargetName="border" Storyboard.TargetProperty="Background.Color"/>
+                                        <ColorAnimation To="Black" Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -53,8 +66,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="350"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3.5*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -70,11 +83,11 @@
         <Button Style="{StaticResource windowStateButton}" Click="Maximize_Click" Content="▢" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="15" Margin="5,5,25,5"/>
         <Button Style="{StaticResource windowStateButton}" Click="Minimize_Click" Content="–" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Margin="5,5,45,5"/>
 
-        <TextBlock Text="{Binding ProductName}" HorizontalAlignment="Center" FontSize="60" Margin="0,30,0,0"/>
+        <TextBlock x:Name="ProductName" Text="{Binding ProductName}" HorizontalAlignment="Center" FontSize="60" Margin="0,30,0,0"/>
 
         <Image Grid.Row="1" Source="{Binding ImageSource}"/>
 
-        <TextBlock Text="{Binding ProductDescription}" Grid.Row="2" TextWrapping="Wrap" Margin="20,0,20,0" FontSize="18"/>
+        <TextBlock Text="{Binding ProductDescription}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Margin="20,0,20,0" FontSize="18"/>
 
         <DockPanel Grid.Row="3" VerticalAlignment="Bottom">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontSize="24" FontWeight="SemiBold">

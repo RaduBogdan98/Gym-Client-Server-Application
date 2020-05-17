@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FitNessCompanionApp.Pages;
+using FitNessCompanionApp.ViewModels;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,69 +9,80 @@ namespace FitNessCompanionApp
 {
     class MainWindowViewModel : INotifyPropertyChanged
     {
+        private MainWindowViewModel()
+        {
+            cartViewModel = CartViewModel.Instance;
+        }
+
         #region Methods
-        internal void GoToHome()
+        internal void NotifyCartItemsNumberChanged()
         {
-            onHome = true;
-            onProducts = false;
-            NotifyPropertyChanged("OnHome");
-            NotifyPropertyChanged("OnProducts");
+            NotifyPropertyChanged("CartItemsNumber");
         }
 
-        internal void GoToProducts()
-        {
-            onProducts = true;
-            onHome = false;
-            NotifyPropertyChanged("OnHome");
-            NotifyPropertyChanged("OnProducts");
-        }
-
-        internal void GoToContact()
+        internal void RefreshOrders()
         {
 
         }
 
-        internal void GoToOther()
+        internal void RefreshProducts()
         {
 
         }
         #endregion
 
         #region Properties
-        public Visibility OnHome
+        public static MainWindowViewModel Instance
         {
             get
             {
-                if (true == onHome)
+                if(instance == null)
                 {
-                    return Visibility.Visible;
+                    instance = new MainWindowViewModel();
                 }
-                else
-                {
-                    return Visibility.Collapsed;
-                }
+
+                return instance;
             }
         }
 
-        public Visibility OnProducts
+        public int CartItemsNumber
         {
             get
             {
-                if (true == onProducts)
-                {
-                    return Visibility.Visible;
-                }
-                else
-                {
-                    return Visibility.Collapsed;
-                }
+                return cartViewModel.getProductsCount();
+            }
+        }
+
+        public bool ShouldUserPageUpdate
+        {
+            get
+            {
+                return shouldUserPageUpdate;
+            }
+            set
+            {
+                shouldUserPageUpdate = value;
+            }
+        }
+
+        public bool ShouldProductsPageUpdate
+        {
+            get
+            {
+                return shouldProductsPageUpdate;
+            }
+            set
+            {
+                shouldProductsPageUpdate = value;
             }
         }
         #endregion
 
         #region Fields
-        private bool onHome = true;
-        private bool onProducts = false;
+        private static MainWindowViewModel instance;
+        private CartViewModel cartViewModel;
+        private bool shouldUserPageUpdate = false;
+        private bool shouldProductsPageUpdate = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion

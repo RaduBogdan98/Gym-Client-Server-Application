@@ -1,17 +1,9 @@
-﻿using FitNessCompanionApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FitNessCompanionApp.Model;
+using FitNessCompanionApp.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FitNessCompanionApp.Views
 {
@@ -20,10 +12,11 @@ namespace FitNessCompanionApp.Views
     /// </summary>
     public partial class ProductPresenterView : Window
     {
-        public ProductPresenterView(string name, string description, string price, string imageSource)
+        public ProductPresenterView(string name, string description, string price, ImageSource imageSource, ProductsPageViewModel ProductsVM)
         {
             InitializeComponent();
             VM = new ProductsPresenterViewModel(name, description, price, imageSource);
+            this.ProductsVM = ProductsVM;
             this.DataContext = VM;
         }
 
@@ -61,12 +54,21 @@ namespace FitNessCompanionApp.Views
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
+
+            Grid productGrid = ((DockPanel)(sender as Button).Parent).Parent as Grid;
+            string productName = ((TextBlock)productGrid.FindName("ProductName")).Text;
+
+            Product orderedProduct = ProductsVM.findProductByName(productName);
+            CartViewModel.Instance.AddProduct(orderedProduct);
+            MainWindowViewModel.Instance.NotifyCartItemsNumberChanged();
+
             this.Close();
         }
         #endregion
 
         #region Fields
         private ProductsPresenterViewModel VM;
+        private ProductsPageViewModel ProductsVM;
         #endregion
     }
 }

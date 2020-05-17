@@ -4,21 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FitNessCompanionApp.Pages"
-             mc:Ignorable="d" 
-             d:DesignWidth="1000">
+             mc:Ignorable="d"
+             d:DesignWidth="1000" d:DesignHeight="700">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top">
-            <Border Background="White" CornerRadius="10" BorderThickness="0.5" BorderBrush="LightGray" Height="500" Margin="10" MaxWidth="1200">
-                <Border.Effect>
-                    <DropShadowEffect Color="LightGray"/>
-                </Border.Effect>
-                <Border>
-                    <Grid Margin="20,0,20,0">
-                        <Image Source="{Binding DisplayedImage, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Canvas x:Name="FadingCanvas" Background="White"/>
-                    </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="90*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" Grid.Column="1">
+            <Grid Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=ActualHeight}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Border Background="White" CornerRadius="10" BorderThickness="0.5" HorizontalAlignment="Stretch" Grid.Row="0" BorderBrush="LightGray" Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="LightGray"/>
+                    </Border.Effect>
+                    <Border>
+                        <Grid Margin="20,0,20,0">
+                            <Image Source="{Binding DisplayedImage, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Canvas x:Name="FadingCanvas" Background="White"/>
+                        </Grid>
+                    </Border>
                 </Border>
-            </Border>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </UserControl>

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitNessCompanionApp.Views"
         mc:Ignorable="d"
-        Title="" Height="600" Width="500"
-        WindowStyle="None" BorderThickness="0" AllowsTransparency="True">
+        Title="" Height="520" Width="500"
+        WindowStyle="None" BorderThickness="0" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="Margin" Value="20,10,0,0"/>
@@ -136,9 +137,9 @@
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="SemiBold">Log in</TextBlock>
 
                 <Label Content="Username:" Margin="20,50,0,0"/>
-                <TextBox x:Name="User_Login"/>
+                <TextBox x:Name="Name_Login"/>
                 <Label Content="Password:"/>
-                <PasswordBox x:Name="Password_Login" ToolTip="{Binding PasswordHint}" PreviewTextInput="TextBox_PreviewTextInput" />
+                <PasswordBox x:Name="Password_Login" ToolTip="{Binding PasswordHint}" PreviewTextInput="PreviewPasswordInput" />
 
                 <Button Style="{StaticResource requestButton}" Width="100" Margin="30" Click="Login_Click">
                     <TextBlock Padding="8">Login</TextBlock>
@@ -149,16 +150,20 @@
 
             <StackPanel Grid.Column="2" Margin="5,15,5,0">
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="SemiBold">Sign up</TextBlock>
-                <Label Content="Name:" Margin="20,10,0,0"/>
-                <TextBox x:Name="Name_SignUp"/>
+                <Label Content="Username:" Margin="20,10,0,0"/>
+                <Grid>
+                    <TextBox x:Name="Name_SignUp" TextChanged="PreviewUsernameInput" Padding="0,0,17,0"/>
+                    <Ellipse x:Name="UsernameBubble" Width="10" Height="10" Fill="Red" HorizontalAlignment="Right" Margin="0,0,15,2.5"/>
+                </Grid>
                 <Label Content="Email:"/>
-                <TextBox x:Name="Email_SignUp"/>
-                <Label Content="Username:"/>
-                <TextBox x:Name="User_SignUp"/>
+                <Grid>
+                    <TextBox x:Name="Email_SignUp" ToolTip="{Binding EmailHint}" TextChanged="PreviewEmailInput" Padding="0,0,17,0"/>
+                    <Ellipse x:Name="EmailBubble" Width="10" Height="10" Fill="Red" HorizontalAlignment="Right" Margin="0,0,15,2.5"/>
+                </Grid>
                 <Label Content="Password:"/>
-                <PasswordBox x:Name="Password_SignUp" ToolTip="{Binding PasswordHint}" PreviewTextInput="TextBox_PreviewTextInput"/>
+                <PasswordBox x:Name="Password_SignUp" ToolTip="{Binding PasswordHint}" PreviewTextInput="PreviewPasswordInput"/>
                 <Label Content="Confirm Password:"/>
-                <PasswordBox x:Name="PasswordConfirm_SignUp" ToolTip="{Binding PasswordHint}" PreviewTextInput="TextBox_PreviewTextInput"/>
+                <PasswordBox x:Name="PasswordConfirm_SignUp" ToolTip="{Binding PasswordHint}" PreviewTextInput="PreviewPasswordInput"/>
 
                 <Button Style="{StaticResource requestButton}" Width="100" Margin="30" Click="SignUp_Click">
                     <TextBlock Padding="8">Sign Up</TextBlock>

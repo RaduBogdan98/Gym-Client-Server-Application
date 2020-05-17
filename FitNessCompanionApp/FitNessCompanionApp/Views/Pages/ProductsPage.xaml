@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FitNessCompanionApp.Pages"
+             xmlns:converters="clr-namespace:FitNessCompanionApp.Helpers.Converter"
              mc:Ignorable="d" 
              d:DesignWidth="1000">
     <UserControl.Resources>
+        <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
         <Style x:Key="productCard" TargetType="Button">
             <Setter Property="Height" Value="230"/>
             <Setter Property="Width" Value="230"/>
@@ -19,7 +21,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="BorderBrush" Value="Gray"/>
-                                <Setter TargetName="border" Property="Background" Value="#282828"/>
+                                <Setter TargetName="border" Property="Background" Value="#141414"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -40,7 +42,7 @@
                                 <Setter TargetName="border" Property="BorderBrush" Value="Silver" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#282828"/>
+                                <Setter Property="Background" Value="#141414"/>
                                 <Setter TargetName="border" Property="BorderBrush" Value="Silver" />
                                 <Setter TargetName="border" Property="BorderThickness" Value="1" />
                             </Trigger>
@@ -66,7 +68,7 @@
                                     </Grid.RowDefinitions>
 
                                     <Border Grid.Row="0" Background="White" CornerRadius="3">
-                                        <Image x:Name="imageSource" Grid.Row="0" Source="{Binding Image}"/>
+                                        <Image x:Name="imageSource" Grid.Row="0" Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}"/>
                                     </Border>
 
                                     <TextBlock x:Name="productName" Text="{Binding Name}" TextWrapping="Wrap" TextAlignment="Center" Grid.Row="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -75,9 +77,9 @@
 
 
                                     <TextBlock Grid.Row="3" Foreground="White"  Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        $ <TextBlock x:Name="productPrice" Text="{Binding Price}"/>
+                                        $ <TextBlock x:Name="productPrice" Text="{Binding Price, StringFormat='0.00'}"/>
                                     </TextBlock>
-                                    <Button Grid.Row="3" Style="{StaticResource addToCartButton}" FontSize="8" HorizontalAlignment="Right" Margin="5" Padding="5" VerticalAlignment="Center">
+                                    <Button x:Name="AddToCartButton" Grid.Row="3" Style="{StaticResource addToCartButton}" FontSize="8" HorizontalAlignment="Right" Margin="5" Padding="5" VerticalAlignment="Center" Click="AddToCartClick">
                                         <TextBlock Padding="5">Add To Cart</TextBlock>
                                     </Button>
                                 </Grid>

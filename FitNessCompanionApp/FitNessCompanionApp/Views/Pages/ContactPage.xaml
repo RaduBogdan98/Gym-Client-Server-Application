@@ -66,20 +66,18 @@
 
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="20" FontSize="25" Grid.ColumnSpan="2">What can we help you with? 😄</TextBlock>
 
-        <ScrollViewer Grid.Row="2" Grid.Column="0" VerticalScrollBarVisibility="Hidden">
-            <StackPanel>
-                <Label Content="Your Name:" Margin="20,5,0,0"/>
-                <TextBox/>
-                <Label Content="Your Email:"/>
-                <TextBox/>
-                <Label Content="Your Message:"/>
-                <TextBox Height="200"/>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Label Content="Your Name:" Margin="20,5,0,0"/>
+            <TextBox/>
+            <Label Content="Your Email:"/>
+            <TextBox/>
+            <Label Content="Your Message:"/>
+            <TextBox Height="200"/>
 
-                <Button Style="{StaticResource sendButton}" Width="150" Margin="10">
-                    <TextBlock Padding="10">Send</TextBlock>
-                </Button>
-            </StackPanel>
-        </ScrollViewer>
+            <Button Style="{StaticResource sendButton}" Width="150" Margin="10">
+                <TextBlock Padding="10">Send</TextBlock>
+            </Button>
+        </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,80,0,0">
             <DockPanel Margin="10">

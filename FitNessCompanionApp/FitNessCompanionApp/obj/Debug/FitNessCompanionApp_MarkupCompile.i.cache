@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\FACULTATE\Projects\FitNessCompanionApp\FitNessCompanionApp\obj\Debug\
+D:\FACULTATE\Anul III\Semestrul II\PAD\GymApp\FitNessCompanionApp\FitNessCompanionApp\obj\Debug\
 FitNessCompanionApp
 none
 false
 DEBUG;TRACE
-D:\FACULTATE\Projects\FitNessCompanionApp\FitNessCompanionApp\App.xaml
-6404403180
+D:\FACULTATE\Anul III\Semestrul II\PAD\GymApp\FitNessCompanionApp\FitNessCompanionApp\App.xaml
+91496132794
 
-20856523365
-131569487696
-Views\LoginView.xaml;Views\Pages\ContactPage.xaml;Views\Pages\HomePage.xaml;MainWindow.xaml;Views\Pages\ProductsPage.xaml;Views\ProductPresenterView.xaml;
+29-1251135552
+16495288064
+Views\CartView.xaml;Views\LoginView.xaml;Views\MessageDialog.xaml;Views\Pages\ContactPage.xaml;Views\Pages\HomePage.xaml;MainWindow.xaml;Views\Pages\ProductsPage.xaml;Views\Pages\UserPage.xaml;Views\ProductPresenterView.xaml;
 
-False
+True
 
