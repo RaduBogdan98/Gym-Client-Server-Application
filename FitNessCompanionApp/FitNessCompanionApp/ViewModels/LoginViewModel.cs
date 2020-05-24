@@ -14,14 +14,14 @@ namespace FitNessCompanionApp.ViewModels
         {
             get
             {
-                return "Use upper-case and lower-case letters, numbers and special characters like: _ # -";
+                return "Use upper-case and lower-case letters, numbers and separators like: _ -";
             }
         }
         public string EmailHint
         {
             get
             {
-                return "user_email@domain.com";
+                return "<user_email>@<domain>.<tld>";
             }
         }
         #endregion
@@ -35,14 +35,21 @@ namespace FitNessCompanionApp.ViewModels
                 {
                     HttpResponseMessage httpResponse = http.GetAsync("http://localhost:8080//users/login/" + username + "/" + password).Result;
                     string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
-                    User logedUser = JsonConvert.DeserializeObject<User>(responseContent);
-                    UserPageViewModel.SetCurrentUser(logedUser);
-                    return (logedUser != null);
+                    if(responseContent != "")
+                    {
+                        User logedUser = JsonConvert.DeserializeObject<User>(responseContent);
+                        UserPageViewModel.SetCurrentUser(logedUser);
+                        return (logedUser != null);
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
             catch
             {
-                new MessageDialog("Server is not running!").Show();
+                MessageDialog.ShowMessage("Server is not running!");
                 return null;
             }
         }
@@ -60,7 +67,7 @@ namespace FitNessCompanionApp.ViewModels
             }
             catch
             {
-                new MessageDialog("Server is not running!").Show();
+                MessageDialog.ShowMessage("Server is not running!");
                 return null;
             }
         }
@@ -78,7 +85,7 @@ namespace FitNessCompanionApp.ViewModels
             }
             catch
             {
-                new MessageDialog("Server is not running!").Show();
+                MessageDialog.ShowMessage("Server is not running!");
                 return null;
             }
         }
@@ -89,7 +96,7 @@ namespace FitNessCompanionApp.ViewModels
             {
                 if (!password.Equals(confirmPassword))
                 {
-                    new MessageDialog("Passwords don't match!").Show();
+                    MessageDialog.ShowMessage("Passwords don't match!");
                     return false;
                 }
                 else
@@ -108,7 +115,7 @@ namespace FitNessCompanionApp.ViewModels
             }
             catch
             {
-                new MessageDialog("Server is not running!").Show();
+                MessageDialog.ShowMessage("Server is not running!");
                 return null;
             }
         }

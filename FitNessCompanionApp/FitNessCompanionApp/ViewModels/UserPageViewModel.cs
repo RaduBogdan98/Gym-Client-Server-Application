@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FitNessCompanionApp.ViewModels
 {
@@ -22,13 +23,14 @@ namespace FitNessCompanionApp.ViewModels
             if (isAdmin(user))
             {
                 this.userType = UserType.Admin;
+
             }
             else
             {
                 this.userType = UserType.Regular;
             }
 
-
+            products = RequestProductsFromServer();
             ordersList = RequestOrdersFromServer();
 
         }
@@ -56,9 +58,49 @@ namespace FitNessCompanionApp.ViewModels
             NotifyPropertyChanged("OrdersList");
         }
 
+        private ObservableCollection<Product> RequestProductsFromServer()
+        {
+            ObservableCollection<Product> products;
+            using (HttpClient http = new HttpClient())
+            {
+                HttpResponseMessage httpResponse = http.GetAsync("http://localhost:8080/products/all").Result;
+                string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
+                products = JsonConvert.DeserializeObject<ObservableCollection<Product>>(responseContent);
+            }
+
+            return products;
+        }
+
+        internal Product GetProductByName(string productName)
+        {
+            return StoreProducts.FirstOrDefault(x => x.Name == productName);
+        }
+
+        internal void UpdateProduct(Product product)
+        {
+            try
+            {
+                using (HttpClient http = new HttpClient())
+                {
+                    HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+                    HttpResponseMessage httpResponse = http.PutAsync("http://localhost:8080/products/update", httpContent).Result;
+
+                    string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
+                    JsonConvert.DeserializeObject<List<Product>>(responseContent);
+                    MessageDialog.ShowMessage("Product updated!");
+
+                    ProductsPageViewModel.Instance.Refresh();
+                }
+            }
+            catch
+            {
+                MessageDialog.ShowMessage("Server is not running!");
+            }
+        }
+
         private bool isAdmin(User user)
         {
-            return user.Username.StartsWith("Admin") && user.Password.EndsWith("FitAdmin@FitnessCorp.com");
+            return user.Username.StartsWith("Admin") && user.Password.EndsWith("admin");
         }
 
         private ObservableCollection<Order> RequestOrdersFromServer()
@@ -88,13 +130,34 @@ namespace FitNessCompanionApp.ViewModels
             }
             catch
             {
-                new MessageDialog("Server is not running!");
+                MessageDialog.ShowMessage("Server is not running!");
                 return null;
             }
         }
         #endregion
 
         #region Properties
+        public Visibility AdminVisibility
+        {
+            get
+            {
+                if (isAdmin(user)) return Visibility.Visible;
+                else return Visibility.Collapsed;
+            }
+        }
+
+        public ObservableCollection<Product> StoreProducts
+        {
+            get
+            {
+                return products;
+            }
+            set
+            {
+                products = value;
+            }
+        }
+
         public ObservableCollection<Order> OrdersList
         {
             get
@@ -144,6 +207,7 @@ namespace FitNessCompanionApp.ViewModels
 
         #region Fields
         private ObservableCollection<Order> ordersList;
+        private ObservableCollection<Product> products;
         private User user;
         private UserType userType;
         private static UserPageViewModel instance;

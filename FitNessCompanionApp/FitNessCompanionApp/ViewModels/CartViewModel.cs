@@ -30,7 +30,6 @@ namespace FitNessCompanionApp.ViewModels
             }
             else
             {
-                product.Stock = 1;
                 orderContent.Add(new OrderItem(product, 1));
             }
 
@@ -51,7 +50,6 @@ namespace FitNessCompanionApp.ViewModels
         internal void changeProductQuantity(string productName, int newQuantity)
         {
             orderContent.FirstOrDefault(item => item.Product.Name == productName).ChangeItemQuantity(newQuantity);
-
             NotifyPropertyChanged("OrderContent");
         }
 
@@ -77,28 +75,38 @@ namespace FitNessCompanionApp.ViewModels
 
                         HttpResponseMessage httpResponse = http.PostAsync("http://localhost:8080//orders/add", postContent).Result;
 
+                        UpdateProductStock();
                         OrderContent.Clear();
 
                         NotifyPropertyChanged("OrderContent");
                         UserPageViewModel.GetInstance().Refresh();
 
-                        new MessageDialog("Thank you for your order! 😄").Show();
+                        MessageDialog.ShowMessage("Thank you for your order! 😄");
 
                         return true;
                     }
                 }
                 catch
                 {
-                    new MessageDialog("Server is not running!").Show();
+                    MessageDialog.ShowMessage("Server is not running!");
                     return false;
                 }
             }
             else
             {
-                new MessageDialog("Your cart is empty!").Show();
+                MessageDialog.ShowMessage("Your cart is empty!");
                 return false;
             }
            
+        }
+
+        private void UpdateProductStock()
+        {
+            foreach(OrderItem item in OrderContent)
+            {
+                item.Product.Stock -= item.Quantity;
+                UserPageViewModel.GetInstance().UpdateProduct(item.Product);
+            }
         }
         #endregion
 

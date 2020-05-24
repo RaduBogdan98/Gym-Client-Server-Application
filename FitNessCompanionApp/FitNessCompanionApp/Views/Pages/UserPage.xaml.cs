@@ -75,6 +75,18 @@ namespace FitNessCompanionApp.Pages
             FindAncestor<ListBoxItem>(sender as Button).IsSelected = true;
             VM.RemoveOrder(this.OrdersList.SelectedIndex);
         }
+
+        private void RemoveProductClick(object sender, RoutedEventArgs e)
+        {
+            FindAncestor<ListBoxItem>(sender as Button).IsSelected = true;
+            VM.RemoveOrder(this.OrdersList.SelectedIndex);
+        }
+
+        private void UpdateProductClick(object sender, RoutedEventArgs e)
+        {
+            string productToUpdate = ((TextBlock)(((sender as Button).Parent as Grid).Parent as Grid).FindName("ProductName")).Text;
+            VM.UpdateProduct(VM.GetProductByName(productToUpdate));
+        }
         #endregion
 
         #region Methods

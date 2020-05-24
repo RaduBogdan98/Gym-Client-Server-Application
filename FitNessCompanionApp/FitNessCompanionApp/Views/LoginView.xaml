@@ -152,7 +152,7 @@
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="SemiBold">Sign up</TextBlock>
                 <Label Content="Username:" Margin="20,10,0,0"/>
                 <Grid>
-                    <TextBox x:Name="Name_SignUp" TextChanged="PreviewUsernameInput" Padding="0,0,17,0"/>
+                    <TextBox x:Name="Name_SignUp" ToolTip="{Binding PasswordHint}" TextChanged="PreviewUsernameInput" Padding="0,0,17,0"/>
                     <Ellipse x:Name="UsernameBubble" Width="10" Height="10" Fill="Red" HorizontalAlignment="Right" Margin="0,0,15,2.5"/>
                 </Grid>
                 <Label Content="Email:"/>

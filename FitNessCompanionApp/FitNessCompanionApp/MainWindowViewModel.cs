@@ -19,16 +19,6 @@ namespace FitNessCompanionApp
         {
             NotifyPropertyChanged("CartItemsNumber");
         }
-
-        internal void RefreshOrders()
-        {
-
-        }
-
-        internal void RefreshProducts()
-        {
-
-        }
         #endregion
 
         #region Properties

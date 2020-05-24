@@ -22,7 +22,8 @@ namespace FitNessCompanionApp.ViewModels
             {
                 HttpResponseMessage httpResponse = http.GetAsync("http://localhost:8080/products/all").Result;
                 string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
-                products = JsonConvert.DeserializeObject<List<Product>>(responseContent);
+                products = JsonConvert.DeserializeObject<List<Product>>(responseContent).Where(x => x.Stock != 0).ToList();
+          
             }
 
             return products;

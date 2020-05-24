@@ -13,19 +13,6 @@ namespace FitNessCompanionApp.Model
             this.TotalPrice = TotalPrice;
         }
 
-        #region Methods
-        private double computePrice(List<OrderItem> orderContent)
-        {
-            double sum = 0;
-            foreach(OrderItem item in orderContent)
-            {
-                sum += item.Product.Price * item.Quantity;
-            }
-
-            return sum;
-        }
-        #endregion
-
         #region Fields
         [JsonProperty("orderDate")]
         public string OrderDate { get; set; }

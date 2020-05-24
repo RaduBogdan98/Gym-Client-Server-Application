@@ -1,5 +1,7 @@
 ﻿using FitNessCompanionApp.ViewModels;
+using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -46,14 +48,22 @@ namespace FitNessCompanionApp.Views
 
         private void PreviewPasswordInput(object sender, TextCompositionEventArgs e)
         {
-
+            string allowedSpecialCharacters = "-_";
+            foreach (char ch in e.Text)
+            {
+                if (!Char.IsDigit(ch) && !Char.IsLetter(ch) && !allowedSpecialCharacters.Contains(ch))
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
         }
 
         private async void PreviewEmailInput(object sender, TextChangedEventArgs e)
         {
             string email = (sender as TextBox).Text;
 
-            if (email != "")
+            if (email != "" && emailRegex.Match(email).Value.Equals(email))
             {
                 bool? isExistent = await VM.IsEmailAlreadyExistent(email);
 
@@ -77,7 +87,7 @@ namespace FitNessCompanionApp.Views
         {
             string username = (sender as TextBox).Text;
 
-            if (username != "")
+            if (username != "" && usernameRegex.Match(username).Value.Equals(username))
             {
                 bool? isExistent = await VM.IsUsernameAlreadyExistent(username);
                 if (true == isExistent)
@@ -110,12 +120,12 @@ namespace FitNessCompanionApp.Views
                 }
                 else if (false == requestRestult)
                 {
-                    new MessageDialog("Wrong credentials! Retry or Sign Up!").Show();
+                    MessageDialog.ShowMessage("Wrong credentials! Retry or Sign Up!");
                 }
             }
             else
             {
-                new MessageDialog("Wrong input!").Show();
+                MessageDialog.ShowMessage("Wrong input!");
             }
         }
 
@@ -137,7 +147,7 @@ namespace FitNessCompanionApp.Views
             }
             else
             {
-                new MessageDialog("Wrong input!").Show();
+                MessageDialog.ShowMessage("Wrong input!");
             }
         }
 
@@ -150,6 +160,8 @@ namespace FitNessCompanionApp.Views
 
         #region Fields
         private LoginViewModel VM;
+        private Regex emailRegex = new Regex("[A-Z,a-z,0-9,_]+[@][A-Z,a-z,0-9,-]+[.][A-Z,a-z]+");
+        private Regex usernameRegex = new Regex("[A-Z,a-z,0-9,_,-]+");
         #endregion
     }
 }

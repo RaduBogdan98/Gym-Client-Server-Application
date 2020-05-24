@@ -26,6 +26,11 @@ namespace FitNessCompanionApp.Views
         }
 
         #region Methods
+        public static void ShowMessage(string message)
+        {
+            new MessageDialog(message).Show();
+        }
+
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

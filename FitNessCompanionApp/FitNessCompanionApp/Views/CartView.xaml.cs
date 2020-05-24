@@ -1,18 +1,8 @@
 ﻿using FitNessCompanionApp.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace FitNessCompanionApp.Views
 {
@@ -89,8 +79,16 @@ namespace FitNessCompanionApp.Views
                 if(!Char.IsDigit(ch))
                 {
                     e.Handled = true;
-                    break;
+                    return;
                 }
+            }
+
+            String productName = ((TextBlock)(((Grid)((WrapPanel)(sender as TextBox).Parent).Parent).Parent as Grid).FindName("ProductName")).Text;
+            String newQuantity = (sender as TextBox).Text + e.Text;
+
+            if (newQuantity != "" && int.Parse(newQuantity) > ProductsPageViewModel.Instance.findProductByName(productName).Stock)
+            {
+                e.Handled = true;
             }
         }
         #endregion
