@@ -1,1 +1,18 @@
-<p>shoppingcart works!</p>
+<div class="parent">
+    <h1>My Cart</h1>
+    <div>
+        <div *ngIf="cartItems.length === 0" class="alert alert-info">Your Cart is Empty.</div>
+
+        <div *ngIf="cartItems.length > 0">
+            <cart-item *ngFor="let item of cartItems"
+            [name]="item.name" 
+            [price]="item.price"
+            [image]="item.image" 
+            [quantity]="item.quantity"></cart-item>
+        </div>
+    </div>
+
+    <h2>Total price 100 $</h2>
+
+    <button class="btn btn-one" mat-stroked-button>Submit</button>
+</div>

@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon'
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 import {MatCardModule} from '@angular/material/card'; 
 import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatListModule} from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,8 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { CartItemComponent } from './cart-item/cart-item.component'
+import { OrdersService } from './orders.service';
 
 @NgModule({
   declarations: [
@@ -37,8 +40,9 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     SubscriptionsComponent,
     AboutusComponent,
     ContactComponent,
-    LoginComponent
-    
+    LoginComponent,
+    CartItemComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,7 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     MatIconModule,
     MatSidenavModule,
     MatCardModule,
+    MatListModule,
     MatGridListModule,
     RouterModule.forRoot([
       { path: 'login',
@@ -62,7 +67,8 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
   ],
   providers: [
     TrainerService,
-    ProductsService
+    ProductsService,
+    OrdersService
   ],
   bootstrap: [AppComponent]
 })

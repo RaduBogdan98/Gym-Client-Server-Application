@@ -1,0 +1,43 @@
+.parent{
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    width: 98%;
+    text-align: center;
+    border:1px solid black;
+}
+
+h1{
+    background-color: black;
+    color: white;
+    font-size: 50;
+    text-align: center;
+    font-weight: bold;
+    height: 80px;
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+
+h2{
+    padding-top: 20px;
+    font-size: 100;
+    text-align: right;
+    margin-right: 60px;
+}
+
+.btn
+{
+	border: 1px solid white;
+	padding: 10px 30px;
+	color: white;
+	text-decoration: none;
+	margin-right: 5px;
+	font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.btn-one
+{
+	background-color: darkorange;
+	font-family: "Roboto", sans-serif;
+}
