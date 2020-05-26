@@ -15,7 +15,6 @@ div
 mat-card-content
 {
     color: black;
-    text-align: center;
 }
 
 mat-card
@@ -74,9 +73,10 @@ span
 p
 {
     height: 30px;
-    word-wrap: break-word;
 }
 
+
+  
 .right 
 {
     text-align: right /* only needed for the table version */

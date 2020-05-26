@@ -63,6 +63,7 @@ import { OrdersService } from './orders.service';
         path: 'shoppingcart',
         component: ShoppingcartComponent
       }
+      
     ])
   ],
   providers: [
