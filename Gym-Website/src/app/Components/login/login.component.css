@@ -1,5 +1,5 @@
 #login{
-    background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(..\..\assets\carousel\poza21.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(..\..\..\assets\carousel\poza21.jpg);
     background-size: cover;
     background-position: center;
     color: #efefef;

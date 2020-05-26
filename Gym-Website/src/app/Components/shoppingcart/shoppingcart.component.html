@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <h2>Total price 100 $</h2>
+    <h2>Total price {{cartTotal}} $</h2>
 
-    <button class="btn btn-one" mat-stroked-button>Submit</button>
+    <button class="btn btn-one" (click)="sendOrder()" mat-stroked-button>Submit</button>
 </div>

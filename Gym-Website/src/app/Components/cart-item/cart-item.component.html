@@ -3,7 +3,7 @@
         <table width="100%">
             <tr>
                 <td width="20%" style="border-right: 2px solid gray;">
-                    <img src="./assets/products/{{image}}">
+                    <img src="data:image/jpg;base64,{{image}}">
                 </td>
 
                 <td width="30%" style="border-right: 2px solid gray;">{{name}}</td>
@@ -12,7 +12,7 @@
 
                 <td width="20%" style="border-right: 2px solid gray;">Quantity: <input type="text" value="{{quantity}}" size="3"></td>
 
-                <td width="10%"><a class="btn btn-one" href="" mat-stroked-button>X</a></td>
+                <td width="10%"><a class="btn btn-one" (click)="removeFromCart()" mat-stroked-button>X</a></td>
             </tr>
         </table>
     </mat-card>

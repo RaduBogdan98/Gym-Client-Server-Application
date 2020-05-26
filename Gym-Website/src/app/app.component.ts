@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { TrainerService } from './trainer.service';
-import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
+import { TrainerService } from './Services/trainer.service';
+import { TrainerProfileComponent } from './Components/trainer-profile/trainer-profile.component';
 
 @Component({
   selector: 'app-root',

@@ -1,13 +1,13 @@
-export class OrderItem{
-    image:string;
-    name:string;
-    price:string;
-    quantity:string;
+import { Product } from './Product';
 
-    constructor( image:string, name:string, price:string, quantity:string){
-        this.image=image;
-        this.name=name;
-        this.price=price;
-        this.quantity=quantity
+export class OrderItem
+{
+    product: Product;
+    quantity: number;
+
+    constructor(product:Product, quantity:number)
+    {
+        this.product=product;
+        this.quantity=quantity;
     }
 }

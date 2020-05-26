@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { TrainerService } from '../trainer.service';
+import { TrainerService } from '../../Services/trainer.service';
 
 @Component({
   selector: 'trainers-section',
