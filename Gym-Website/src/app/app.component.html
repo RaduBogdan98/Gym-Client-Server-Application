@@ -1,7 +1,7 @@
 <menu></menu>
-<router-outlet></router-outlet>
-<app-slide-show></app-slide-show>
 
+<app-login *ngIf="showLogin == true"></app-login>
+<app-slide-show></app-slide-show>
 <app-aboutus></app-aboutus>
 <app-subscriptions></app-subscriptions>
 <trainers-section></trainers-section>
@@ -9,8 +9,8 @@
 <shoppingcart></shoppingcart> 
 <app-contact></app-contact>
        
-        <script src="./js/smooth-scroll.js"></script>
-        <script>
-            var scroll = new SmoothScroll('a[href*="#"]');
-        </script>
+<script src="./js/smooth-scroll.js"></script>
+<script>
+    var scroll = new SmoothScroll('a[href*="#"]');
+</script>
     

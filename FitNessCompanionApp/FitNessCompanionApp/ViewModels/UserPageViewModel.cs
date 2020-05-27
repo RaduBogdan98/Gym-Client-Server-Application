@@ -52,10 +52,10 @@ namespace FitNessCompanionApp.ViewModels
             instance = new UserPageViewModel(user);
         }
 
-        internal void RemoveOrder(int index)
+        internal void RemoveProduct(int index)
         {
-            this.ordersList.RemoveAt(index);
-            NotifyPropertyChanged("OrdersList");
+            this.products.RemoveAt(index);
+            NotifyPropertyChanged("StoreProducts");
         }
 
         private ObservableCollection<Product> RequestProductsFromServer()
@@ -87,7 +87,6 @@ namespace FitNessCompanionApp.ViewModels
 
                     string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
                     JsonConvert.DeserializeObject<List<Product>>(responseContent);
-                    MessageDialog.ShowMessage("Product updated!");
 
                     ProductsPageViewModel.Instance.Refresh();
                 }

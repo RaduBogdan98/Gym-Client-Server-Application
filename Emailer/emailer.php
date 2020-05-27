@@ -2,6 +2,8 @@
 require('class.phpmailer.php');
 require('class.smtp.php');
 require('PHPMailerAutoload.php');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 
 class EmailItem {
 
@@ -22,7 +24,7 @@ class EmailItem {
 	function send_email() {
 		
 		$mail = new PHPMailer;
-		$mail->SMTPDebug = 4;	//comment this to hide the execution messages on the page
+		//$mail->SMTPDebug = 4;	//comment this to hide the execution messages on the page
 		$mail->isSMTP();
 
 		//Email address info:
@@ -51,7 +53,6 @@ class EmailItem {
 		    echo 'Confirmation email sent';
 		}
 	}
-
 }
 
 $input = json_decode(file_get_contents('php://input'), true);

@@ -32,4 +32,12 @@ export class CartItemComponent implements OnInit {
     let myOrderItem = new CartItem(this.image, this.name, this.price, this.quantity);
     this.messengerService.sendOrderItem(myOrderItem);
   }
+
+  onQuantityChange(quantityValue: string): void {  
+    if(quantityValue!=""){
+      this.quantity = Number.parseFloat(quantityValue);
+      let myOrderItem = new CartItem(this.image, this.name, this.price, this.quantity);
+      this.messengerService.sendOrderItemQuantity(myOrderItem);
+    }
+  }
 }

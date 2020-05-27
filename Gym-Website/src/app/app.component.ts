@@ -1,12 +1,23 @@
-import { Component, Input } from '@angular/core';
-import { TrainerService } from './Services/trainer.service';
-import { TrainerProfileComponent } from './Components/trainer-profile/trainer-profile.component';
+import { Component, Input, OnInit } from '@angular/core';
+import { MessengerService } from './Services/messenger.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Gym-Website';
+export class AppComponent implements OnInit {
+  showLogin=false;
+
+  constructor(private messengerService:MessengerService){}
+  ngOnInit(): void {
+    this.messengerService.getLoginState().subscribe(state => {
+      if(state == 'visible'){
+        this.showLogin=true;
+      }
+      else if (state == 'hidden'){
+        this.showLogin=false;
+      }
+    })
+  }
 }

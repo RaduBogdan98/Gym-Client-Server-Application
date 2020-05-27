@@ -1,5 +1,6 @@
 ﻿using FitNessCompanionApp.Model;
 using FitNessCompanionApp.ViewModels;
+using FitNessCompanionApp.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -70,22 +71,17 @@ namespace FitNessCompanionApp.Pages
             Application.Current.Shutdown();
         }
 
-        private void RemoveOrder(object sender, RoutedEventArgs e)
-        {
-            FindAncestor<ListBoxItem>(sender as Button).IsSelected = true;
-            VM.RemoveOrder(this.OrdersList.SelectedIndex);
-        }
-
         private void RemoveProductClick(object sender, RoutedEventArgs e)
         {
             FindAncestor<ListBoxItem>(sender as Button).IsSelected = true;
-            VM.RemoveOrder(this.OrdersList.SelectedIndex);
+            VM.RemoveProduct(this.ProductsList.SelectedIndex);
         }
 
         private void UpdateProductClick(object sender, RoutedEventArgs e)
         {
             string productToUpdate = ((TextBlock)(((sender as Button).Parent as Grid).Parent as Grid).FindName("ProductName")).Text;
             VM.UpdateProduct(VM.GetProductByName(productToUpdate));
+            MessageDialog.ShowMessage("Product updated!");
         }
         #endregion
 

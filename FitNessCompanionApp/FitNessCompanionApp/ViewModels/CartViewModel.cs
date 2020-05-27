@@ -81,6 +81,7 @@ namespace FitNessCompanionApp.ViewModels
                         NotifyPropertyChanged("OrderContent");
                         UserPageViewModel.GetInstance().Refresh();
 
+                        SendOrderConfirmationEmail(submitedOrder);
                         MessageDialog.ShowMessage("Thank you for your order! 😄");
 
                         return true;
@@ -96,8 +97,39 @@ namespace FitNessCompanionApp.ViewModels
             {
                 MessageDialog.ShowMessage("Your cart is empty!");
                 return false;
+            }       
+        }
+
+        private void SendOrderConfirmationEmail(Order o)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                string message = BuildOrderEmailMessage(o);
+                EmailItem email = new EmailItem(o.User.Email, "support@fitness.com", "Order Confirmation", message);
+                HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, "application/json");
+                try
+                {
+                    HttpResponseMessage response = http.PostAsync("http://localhost:80/Emailer/emailer.php", httpContent).Result;
+                }
+                catch
+                {
+                    MessageDialog.ShowMessage("Server error!");
+                }
             }
-           
+        }
+        
+        private string BuildOrderEmailMessage(Order o)
+        {
+            string message = "Your order containing:\n";
+
+            foreach(var item in o.OrderContent)
+            {
+                message += "\t" + item.Product.Name + " of price " + item.Product.Price + "$ x " + item.Quantity + "\n";
+            }
+
+            message += "\n\tTotal Price: " + o.TotalPrice+"\n\nThank you for ordering from us!\nFitNess Team";
+
+            return message;
         }
 
         private void UpdateProductStock()

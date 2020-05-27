@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import { LoginService } from 'src/app/Services/login.service';
 import { User } from 'src/app/Model/User';
 import { MessengerService } from 'src/app/Services/messenger.service';
+import { EmailService } from 'src/app/Services/email.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('password_signup') password_signup : ElementRef;
   @ViewChild('passwordConfirm_signup') passwordConfirm_signup : ElementRef;
 
-  constructor(private loginService : LoginService, private messageService : MessengerService) { }
+  constructor(private loginService : LoginService, private messageService : MessengerService, private emailService:EmailService) { }
 
   ngOnInit(): void {
   }
@@ -32,7 +33,9 @@ export class LoginComponent implements OnInit {
           alert('Login Failed!');
         }
         else{
+          alert('Login Succesful!');
           this.messageService.sendUser(user);
+          this.messageService.sendLoginState('hidden');
         }
       },
       err =>{
@@ -47,26 +50,69 @@ export class LoginComponent implements OnInit {
     let password = this.password_signup.nativeElement.value;
     let passwordConfirm = this.passwordConfirm_signup.nativeElement.value;
 
-    if(password == passwordConfirm){
-      let user = new User(username,email,password);
-      this.loginService.signUp(user).subscribe(
-        res=>{
-          if(res!=null){
-            this.messageService.sendUser(user);
+    if(password == passwordConfirm)
+    {  
+      this.loginService.usernameExists(username).subscribe(
+        (res : boolean) => {
+          if(res == false) {
+            this.verifyEmail(email)
           }
-          else{
-            alert('SignUp failed!');
+          else
+          {
+            alert('Invalid credentials!');
           }
         },
-        err=>{
-          alert('Server error!');
+        err =>{
+          alert('Server error user!');
         }
       );
     }
     else
     {
-      alert('Passwords do not match!');
+      alert('Invalid credentials!');
     }
+  }
+
+  verifyEmail(email){
+    this.loginService.emailExists(email).subscribe(
+      (res : boolean) => {
+        if(res == false) 
+        {
+          this.doSignUp()
+        }
+        else
+        {
+          alert('Invalid credentials!');
+        }
+      },
+      err =>{
+        alert('Server error!');
+      }
+    );
+  }
+
+  doSignUp(){
+    let username = this.username_signup.nativeElement.value;
+    let email = this.email_signup.nativeElement.value;
+    let password = this.password_signup.nativeElement.value;
+
+    let user = new User(username,email,password);
+    this.loginService.signUp(user).subscribe(
+      res=>{
+        if(res!=null){
+          alert('SignUp Succesful!');
+          this.messageService.sendUser(user);
+          this.messageService.sendLoginState('hidden');
+          this.emailService.sendEmailOnSignUp(user);
+        }
+        else{
+          alert('SignUp failed!');
+        }
+      },
+      err=>{
+        alert('Server error!');
+      }
+    );
   }
 
 }

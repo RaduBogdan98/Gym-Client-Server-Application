@@ -6,6 +6,7 @@ import { Product } from '../../Model/Product';
 import { Order } from '../../Model/Order';
 import { User } from '../../Model/User';
 import { OrderItem } from '../../Model/OrderItem';
+import { EmailService } from 'src/app/Services/email.service';
 
 @Component({
   selector: 'shoppingcart',
@@ -17,7 +18,7 @@ export class ShoppingcartComponent implements OnInit {
   cartTotal = 0;
   user: User;
 
-  constructor(private ordersService: OrdersService, private messengerService:MessengerService) {
+  constructor(private ordersService: OrdersService, private messengerService:MessengerService, private emailService: EmailService) {
     this.user = null;
   }
 
@@ -44,6 +45,18 @@ export class ShoppingcartComponent implements OnInit {
 
       this.calculateCartTotal();
     });
+
+    this.messengerService.getOrderItemQuantity().subscribe((itemWithNewQuantity:CartItem) =>
+    {
+      for(let i=0;i<this.cartItems.length; i++){
+        if(this.cartItems[i].name == itemWithNewQuantity.name){
+          this.cartItems[i].quantity = itemWithNewQuantity.quantity;
+          break;
+        }
+      }
+
+      this.calculateCartTotal();
+    })
   }
 
   addProductToCart(product:Product)
@@ -79,6 +92,11 @@ export class ShoppingcartComponent implements OnInit {
   }
 
   sendOrder(){
+    if(this.cartItems.length == 0){
+      alert('Your cart is empty!');
+      return;
+    }
+
     if(this.user!=null){
       let order = new Order([], this.user, this.cartTotal);
 
@@ -95,6 +113,7 @@ export class ShoppingcartComponent implements OnInit {
             this.cartTotal = 0;
 
             alert('Your order was posted!');
+            this.emailService.sendEmailForOrder(order);
           }
           else{
             alert('Your order post failed!');

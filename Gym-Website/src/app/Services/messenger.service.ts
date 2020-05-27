@@ -8,7 +8,7 @@ export class MessengerService {
 
   constructor() { }
 
-  //ProductSubject
+  //#region ProductSubject
   productSubject = new Subject();
 
   sendProduct(product)
@@ -20,8 +20,9 @@ export class MessengerService {
   {
     return this.productSubject.asObservable();
   }
+  //#endregion
 
-  //OrderItemSubject
+  //#region OrderItemSubject
   orderItemSubject = new Subject();
 
   sendOrderItem(orderItem)
@@ -33,8 +34,23 @@ export class MessengerService {
   {
     return this.orderItemSubject.asObservable();
   }
+  //#endregion
 
-  //UserSubject
+  //#region OrderItemQuantitySubject
+  orderItemQuantitySubject = new Subject();
+
+  sendOrderItemQuantity(orderItem)
+  {
+    this.orderItemQuantitySubject.next(orderItem); //Trigger order item quantity change event
+  }
+
+  getOrderItemQuantity()
+  {
+    return this.orderItemQuantitySubject.asObservable();
+  }
+  //#endregion
+
+  //#region UserSubject
   userSubject = new Subject();
 
   sendUser(user){
@@ -44,4 +60,17 @@ export class MessengerService {
   getUser(){
     return this.userSubject.asObservable();
   }
+  //#endregion
+
+  //#region LoginInteractionService
+  loginService = new Subject();
+
+  sendLoginState(state){
+    this.loginService.next(state);
+  }
+
+  getLoginState(){
+    return this.loginService.asObservable();
+  }
+  //#endregion
 }

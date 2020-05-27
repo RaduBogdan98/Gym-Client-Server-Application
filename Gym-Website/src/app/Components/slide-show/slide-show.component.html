@@ -1,4 +1,4 @@
-<section id="slide">
+<section id="home">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block img-fluid" src="./assets/carousel/poza1.jpg" width="5000">
@@ -6,8 +6,9 @@
         <div class="hero">
             <h1>Are you ready?</h1>
             <div class="button">
-                <a routerLink="/login" class="btn btn-one" routerLinkActive="active"> LOG IN </a>
-                <a href="" class="btn btn-two"> SIGN UP </a>
+                <button href="#login" *ngIf="isUserLogged === false" (click)="displayLoginPage()" class="btn btn-one"> LOG IN </button>
+                <button href="#login" *ngIf="isUserLogged === false" (click)="displayLoginPage()" class="btn btn-two"> SIGN UP </button>
+                <button *ngIf="isUserLogged === true" (click)="logOut()" class="btn btn-two"> LOG OUT </button>
             </div>
         </div>
     </div>

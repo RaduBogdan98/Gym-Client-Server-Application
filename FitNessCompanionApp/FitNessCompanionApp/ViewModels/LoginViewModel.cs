@@ -108,6 +108,7 @@ namespace FitNessCompanionApp.ViewModels
 
                         HttpResponseMessage httpResponse = http.PostAsync("http://localhost:8080//users/add", postContent).Result;
                         UserPageViewModel.SetCurrentUser(newUser);
+                        SendSignUpEmail(newUser);
 
                         return true;
                     }
@@ -117,6 +118,24 @@ namespace FitNessCompanionApp.ViewModels
             {
                 MessageDialog.ShowMessage("Server is not running!");
                 return null;
+            }
+        }
+
+        private void SendSignUpEmail(User user)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                string message = "Hi there!\n\nWe are really happy to have you on board and we are looking forward to a healthy partnership!\n\nOur best regards!\nFitNess Team";
+                EmailItem email = new EmailItem(user.Email, "support@fitness.com", "Welcome to our team " + user.Username, message);
+                HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, "application/json");
+                try
+                {
+                    HttpResponseMessage response = http.PostAsync("http://localhost:80/Emailer/emailer.php", httpContent).Result;
+                }
+                catch
+                {
+                    MessageDialog.ShowMessage("Server error!");
+                }
             }
         }
 

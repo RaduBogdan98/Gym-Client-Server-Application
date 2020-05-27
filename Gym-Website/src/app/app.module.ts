@@ -58,16 +58,6 @@ import { LoginService } from './Services/login.service';
     MatCardModule,
     MatListModule,
     MatGridListModule,
-    RouterModule.forRoot([
-      { path: 'login',
-        component: LoginComponent
-      } ,
-      {
-        path: 'shoppingcart',
-        component: ShoppingcartComponent
-      }
-      
-    ])
   ],
   providers: [
     TrainerService,

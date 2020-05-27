@@ -68,13 +68,13 @@
 
         <StackPanel Grid.Row="2" Grid.Column="0">
             <Label Content="Your Name:" Margin="20,5,0,0"/>
-            <TextBox/>
+            <TextBox x:Name="Name"/>
             <Label Content="Your Email:"/>
-            <TextBox/>
+            <TextBox x:Name="Email"/>
             <Label Content="Your Message:"/>
-            <TextBox Height="200"/>
+            <TextBox x:Name="Message" Height="200"/>
 
-            <Button Style="{StaticResource sendButton}" Width="150" Margin="10">
+            <Button Style="{StaticResource sendButton}" Click="SendFeedback" Width="150" Margin="10">
                 <TextBlock Padding="10">Send</TextBlock>
             </Button>
         </StackPanel>

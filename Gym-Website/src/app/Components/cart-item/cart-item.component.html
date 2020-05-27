@@ -10,7 +10,7 @@
 
                 <td width="20%" style="border-right: 2px solid gray;">Price: {{price}} $</td>
 
-                <td width="20%" style="border-right: 2px solid gray;">Quantity: <input type="text" value="{{quantity}}" size="3"></td>
+                <td width="20%" style="border-right: 2px solid gray;">Quantity: <input type="text" value="{{quantity}}" (input)="onQuantityChange($event.target.value)" size="3"></td>
 
                 <td width="10%"><a class="btn btn-one" (click)="removeFromCart()" mat-stroked-button>X</a></td>
             </tr>
