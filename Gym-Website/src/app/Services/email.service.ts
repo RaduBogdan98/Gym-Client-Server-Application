@@ -15,7 +15,7 @@ export class EmailService {
   constructor(private http:HttpClient) { }
 
   sendEmailOnSignUp(user:User){
-    let message = "Hi there!\n\nWe are really happy to have you on board and we are looking forward to a healthy partnership!\n\nOur best regards!\nFitNess Team";
+    let message = "Hi there!<br/><br/>We are really happy to have you on board and we are looking forward to a healthy partnership!<br/><br/>Our best regards!<br/>FitNess Team";
     let email = new EmailItem(user.email, "support@fitness.com", "Welcome to our team " + user.username, message);
 
     return this.http.post(this.BASE_URL, email).subscribe();
@@ -30,12 +30,12 @@ export class EmailService {
 
   buildOrderEmailMessage(o:Order):string
   {
-      let message = "Your order containing:\n";
+      let message = "Hi! Your order has been processed! We will send you order as soon as possible!<br/><br/> Order contents:<br/>";
       o.orderContent.forEach((item:OrderItem)=>
       {
-          message += "\t" + item.product.name + " of price " + item.product.price + "$ x " + item.quantity + "\n";
+          message += "&emsp;" + item.product.name + " of price " + item.product.price + "$ x " + item.quantity + "<br/>";
       });
-      message += "\n\tTotal Price: " + o.totalPrice+"\n\nThank you for ordering from us!\nFitNess Team";
+      message += "<br/>&emsp;Total Price: " + o.totalPrice+"$<br/><br/>Thank you for ordering from us!<br/>FitNess Team";
 
       return message;
   }

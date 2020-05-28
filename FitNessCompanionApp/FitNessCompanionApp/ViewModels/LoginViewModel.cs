@@ -125,7 +125,7 @@ namespace FitNessCompanionApp.ViewModels
         {
             using (HttpClient http = new HttpClient())
             {
-                string message = "Hi there!\n\nWe are really happy to have you on board and we are looking forward to a healthy partnership!\n\nOur best regards!\nFitNess Team";
+                string message = "Hi there!<br/><br/>We are really happy to have you on board and we are looking forward to a healthy partnership!<br/><br/>Our best regards!<br/>FitNess Team";
                 EmailItem email = new EmailItem(user.Email, "support@fitness.com", "Welcome to our team " + user.Username, message);
                 HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, "application/json");
                 try

@@ -120,14 +120,14 @@ namespace FitNessCompanionApp.ViewModels
         
         private string BuildOrderEmailMessage(Order o)
         {
-            string message = "Your order containing:\n";
+            string message = "Hi! Your order has been processed! We will send you order as soon as possible!<br/><br/> Order contents:<br/>";
 
             foreach(var item in o.OrderContent)
             {
-                message += "\t" + item.Product.Name + " of price " + item.Product.Price + "$ x " + item.Quantity + "\n";
+                message += "&emsp;" + item.Product.Name + " of price " + item.Product.Price + "$ x " + item.Quantity + "<br/>";
             }
 
-            message += "\n\tTotal Price: " + o.TotalPrice+"\n\nThank you for ordering from us!\nFitNess Team";
+            message += "<br/>&emsp;Total Price: " + o.TotalPrice + "$<br/><br/>Thank you for ordering from us!<br/>FitNess Team";
 
             return message;
         }

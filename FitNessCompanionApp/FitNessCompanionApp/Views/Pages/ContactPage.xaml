@@ -87,12 +87,12 @@
 
             <DockPanel  Margin="10">
                 <Image Source="../../Images/Contact/phone.ico" Height="20" HorizontalAlignment="Left" Margin="30,0,30,0"/>
-                <TextBlock HorizontalAlignment="Center">0787742219</TextBlock>
+                <TextBlock HorizontalAlignment="Center">0365 424 490</TextBlock>
             </DockPanel>
 
             <DockPanel  Margin="10">
                 <Image Source="../../Images/Contact/mail.ico" Height="20" HorizontalAlignment="Left" Margin="30,0,30,0"/>
-                <TextBlock HorizontalAlignment="Center">raducotisel@gmail.com</TextBlock>
+                <TextBlock HorizontalAlignment="Center">support@fitness.com</TextBlock>
             </DockPanel>
 
             <Rectangle Fill="Black" Margin="50,15,50,15" Height="2"/>
