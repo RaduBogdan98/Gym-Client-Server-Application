@@ -52,12 +52,6 @@ namespace FitNessCompanionApp.ViewModels
             instance = new UserPageViewModel(user);
         }
 
-        internal void RemoveProduct(int index)
-        {
-            this.products.RemoveAt(index);
-            NotifyPropertyChanged("StoreProducts");
-        }
-
         private ObservableCollection<Product> RequestProductsFromServer()
         {
             ObservableCollection<Product> products;

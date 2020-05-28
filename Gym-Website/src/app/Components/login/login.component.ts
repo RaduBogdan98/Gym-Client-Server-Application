@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     let password = this.password_signup.nativeElement.value;
     let passwordConfirm = this.passwordConfirm_signup.nativeElement.value;
 
-    if(password == passwordConfirm)
+    if(password == passwordConfirm && this.isInputValid())
     {  
       this.loginService.usernameExists(username).subscribe(
         (res : boolean) => {
@@ -71,6 +71,14 @@ export class LoginComponent implements OnInit {
     {
       alert('Invalid credentials!');
     }
+  }
+
+  isInputValid(){
+    let isUsernameValid = this.username_signup.nativeElement.validationMessage=="";
+    let isEmailValid = this.email_signup.nativeElement.validationMessage=="";
+    let isPasswordValid = this.password_signup.nativeElement.validationMessage=="";
+
+    return isUsernameValid && isEmailValid && isPasswordValid;
   }
 
   verifyEmail(email){

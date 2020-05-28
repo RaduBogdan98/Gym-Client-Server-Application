@@ -243,8 +243,7 @@
                                     <ColumnDefinition Width="150"/>
                                     <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="150"/>
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
 
@@ -279,12 +278,7 @@
                                     <Button Style="{StaticResource updateButton}" Width="30" Height="30" Margin="10,0,10,0" Click="UpdateProductClick">
                                         <TextBlock FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold">↻</TextBlock>
                                     </Button>
-                                    <Rectangle HorizontalAlignment="Right" Fill="LightGray" Width="2" Margin="0,4,0,4"/>
                                 </Grid>
-
-                                <Button Grid.Column="5" Style="{StaticResource deleteButton}" Width="30" Height="30" Margin="10,0,10,0" Click="RemoveProductClick">
-                                    <TextBlock FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold">X</TextBlock>
-                                </Button>
                             </Grid>
                         </Border>
                     </DataTemplate>

@@ -53,16 +53,21 @@ namespace FitNessCompanionApp.Views
 
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-
             Grid productGrid = ((DockPanel)(sender as Button).Parent).Parent as Grid;
             string productName = ((TextBlock)productGrid.FindName("ProductName")).Text;
 
             Product orderedProduct = ProductsVM.findProductByName(productName);
-            CartViewModel.Instance.AddProduct(orderedProduct);
-            MainWindowViewModel.Instance.NotifyCartItemsNumberChanged();
-
-            this.Close();
+            if (orderedProduct.Stock > 0)
+            {
+                this.DialogResult = true;
+                CartViewModel.Instance.AddProduct(orderedProduct);
+                MainWindowViewModel.Instance.NotifyCartItemsNumberChanged();
+                this.Close();
+            }
+            else
+            {
+                MessageDialog.ShowMessage("Product out of stock!");
+            }
         }
         #endregion
 

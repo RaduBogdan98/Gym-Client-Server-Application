@@ -71,12 +71,6 @@ namespace FitNessCompanionApp.Pages
             Application.Current.Shutdown();
         }
 
-        private void RemoveProductClick(object sender, RoutedEventArgs e)
-        {
-            FindAncestor<ListBoxItem>(sender as Button).IsSelected = true;
-            VM.RemoveProduct(this.ProductsList.SelectedIndex);
-        }
-
         private void UpdateProductClick(object sender, RoutedEventArgs e)
         {
             string productToUpdate = ((TextBlock)(((sender as Button).Parent as Grid).Parent as Grid).FindName("ProductName")).Text;

@@ -4,7 +4,6 @@ using FitNessCompanionApp.Views;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace FitNessCompanionApp.Pages
 {
@@ -56,8 +55,16 @@ namespace FitNessCompanionApp.Pages
             string productName = ((TextBlock)productButton.FindName("productName")).Text;
 
             Product orderedProduct = VM.findProductByName(productName);
-            CartViewModel.Instance.AddProduct(orderedProduct);
-            MainWindowViewModel.Instance.NotifyCartItemsNumberChanged();
+
+            if (orderedProduct.Stock > 0)
+            {
+                CartViewModel.Instance.AddProduct(orderedProduct);
+                MainWindowViewModel.Instance.NotifyCartItemsNumberChanged();
+            }
+            else
+            {
+                MessageDialog.ShowMessage("Product out of stock!");
+            }
         }
         #endregion
 
