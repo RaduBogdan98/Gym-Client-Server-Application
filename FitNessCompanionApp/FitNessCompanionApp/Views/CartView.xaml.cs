@@ -51,8 +51,8 @@ namespace FitNessCompanionApp.Views
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
             VM.postOrder();
+            this.DialogResult = true;
             this.Close();
         }
 

@@ -65,7 +65,7 @@ namespace FitNessCompanionApp.ViewModels
         {
             if (this.getProductsCount() != 0)
             {
-                Order submitedOrder = new Order("", UserPageViewModel.GetInstance().CurrentUser, OrderContent.ToList(), 0);
+                Order submitedOrder = new Order("", UserPageViewModel.GetInstance().CurrentUser, OrderContent.ToList(), this.OrderTotalPrice);
 
                 try
                 {
