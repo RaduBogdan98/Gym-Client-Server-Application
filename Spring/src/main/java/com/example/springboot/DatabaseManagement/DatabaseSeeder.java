@@ -1,13 +1,17 @@
 package com.example.springboot.DatabaseManagement;
 
-import com.example.springboot.Model.*;
-import com.example.springboot.Repositories.*;
+import com.example.springboot.Model.Product;
+import com.example.springboot.Model.User;
+import com.example.springboot.Repositories.OrderItemRepository;
+import com.example.springboot.Repositories.OrderRepository;
+import com.example.springboot.Repositories.ProductRepository;
+import com.example.springboot.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
@@ -32,7 +36,6 @@ public class DatabaseSeeder implements CommandLineRunner {
     public void run(String... args) throws Exception {
         populateProducts();
         populateUsers();
-        populateOrders();
     }
 
     private void populateProducts(){
@@ -49,24 +52,8 @@ public class DatabaseSeeder implements CommandLineRunner {
     private void populateUsers() {
         List<User> users = new ArrayList<>();
 
-        users.add(new User("Radu", "raducotisel@yahoo.com", "password98"));
-        users.add(new User("Miruna", "mirunav@yahoo.com", "superPass"));
-        users.add(new User("Beatrice", "beatrix@yahoo.com", "pisici"));
         users.add(new User("Admin", "FitNessAdmin@gmail.com", "admin"));
 
         userRepository.saveAll(users);
-    }
-
-    private void populateOrders(){
-        Set<Product> productSet = productRepository.findAll().stream().collect(Collectors.toSet());
-
-        Set<OrderItem> orderContent = new HashSet<>();
-        for (Product p : productSet) {
-            orderContent.add(new OrderItem(p,2));
-        }
-
-        User user = userRepository.findUserByUsername("Radu");
-
-        orderRepository.save(new Order(user, orderContent));
     }
 }

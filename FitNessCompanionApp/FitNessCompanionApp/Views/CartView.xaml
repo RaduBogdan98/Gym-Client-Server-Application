@@ -160,6 +160,6 @@
         
         <Button Grid.Row="3" Content="Submit" Width="250" Height="80" FontSize="30" Style="{StaticResource requestButton}" Click="Submit_Click"/>
 
-        <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="4"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="5"/>
     </Grid>
 </Window>
